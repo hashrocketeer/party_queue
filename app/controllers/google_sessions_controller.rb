@@ -4,7 +4,11 @@ class GoogleSessionsController < ApplicationController
   end
 
   def create
-    session[:google_user] = true
-    redirect_to root_path
+    if rocketeer?
+      session[:google_user] = true
+      redirect_to root_path
+    else
+      redirect_to new_google_session_path, notice: 'Access Denied'
+    end
   end
 end

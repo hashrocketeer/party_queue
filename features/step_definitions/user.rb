@@ -10,13 +10,13 @@ Then(/^I see the Google login page$/) do
   expect(current_path).to eq(new_google_session_path)
 end
 
-Then(/^I am logged in with Google$/) do
+Then(/^I am logged in to Google$/) do
   stub_request(:get, /\/o\/oauth2\/auth/).
     with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
-    to_return(status: 200, body: google_response, headers: {})
+    to_return(status: 200, body: hashrocket_google_response, headers: {})
   uri = URI('https://accounts.google.com/o/oauth2/auth')
   response = Net::HTTP.get(uri)
-  Capybara.current_session.driver.submit :post, google_sessions_path, params: response
+  Capybara.current_session.driver.submit :post, google_sessions_path, response
 end
 
 Then(/^I see the welcome page$/) do
@@ -30,7 +30,7 @@ And 'I create a music queue' do
   uri = URI('https://accounts.google.com/o/oauth2/auth')
   response = Net::HTTP.get(uri)
   @music_queue_count = MusicQueue.count
-  Capybara.current_session.driver.submit :post, rdio_sessions_path, params: response
+  Capybara.current_session.driver.submit :post, rdio_sessions_path, response
 end
 
 Then(/^another music queue exists$/) do
@@ -43,4 +43,17 @@ Then(/^I am on my music queue page$/) do
   within 'h3' do
     expect(page).to have_content("Queue ##{music_queue.id}")
   end
+end
+
+Given(/^I login to Google without a Hashrocket email$/) do
+  stub_request(:get, /\/o\/oauth2\/auth/).
+    with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+    to_return(status: 200, body: non_hashrocket_google_response, headers: {})
+  uri = URI('https://accounts.google.com/o/oauth2/auth')
+  response = Net::HTTP.get(uri)
+  Capybara.current_session.driver.submit :post, google_sessions_path, response
+end
+
+Then(/^I see the google sessions new page$/) do
+  expect(current_path).to eq(new_google_session_path)
 end
