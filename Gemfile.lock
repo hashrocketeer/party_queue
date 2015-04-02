@@ -27,7 +27,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    addressable (2.3.6)
+    addressable (2.3.8)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     capybara (2.2.1)
@@ -64,6 +64,8 @@ GEM
     fabrication (2.11.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     figaro (1.1.0)
       thor (~> 0.14)
     gherkin (2.12.2)
@@ -171,7 +173,7 @@ GEM
       rspec-mocks (~> 2.14.0)
     ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
-    safe_yaml (1.0.1)
+    safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
@@ -182,6 +184,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.5.0)
+    simple_oauth (0.1.9)
     slop (3.5.0)
     spring (1.3.3)
     sprockets (2.12.3)
@@ -206,7 +209,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    webmock (1.18.0)
+    webmock (1.21.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
     xpath (2.0.0)
@@ -220,6 +223,8 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   fabrication
+  faraday
+  faraday_middleware
   figaro
   haml-rails
   jbuilder (~> 2.0)
@@ -232,6 +237,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  simple_oauth
   spring
   turbolinks
   uglifier (>= 1.3.0)

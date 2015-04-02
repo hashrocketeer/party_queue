@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :google_sessions, only: [:new, :create]
   resources :rdio_sessions, only: :create
   resources :music_queues, only: :show
+  get '/search_track', to: 'search#track'
 end

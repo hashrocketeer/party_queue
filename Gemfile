@@ -18,6 +18,9 @@ gem 'haml-rails'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rdio'
 gem 'figaro'
+gem 'faraday'
+gem 'faraday_middleware'
+gem 'simple_oauth'
 
 group :test, :development do
   gem 'rspec-rails'
