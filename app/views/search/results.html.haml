@@ -1,0 +1,10 @@
+-if @search_results
+  - @search_results.each do |result|
+    %p
+      %div
+        %strong
+          = result['artist']
+      %div= result['album']
+      %div= result['name']
+- else
+  No Search Results

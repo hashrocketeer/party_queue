@@ -57,3 +57,41 @@ def non_hashrocket_google_response
    "email_verified"=>"true",
    "locale"=>"en"}}}
 end
+
+def rdio_track_response
+  {'result' =>
+    {"track_count"=>354,
+     "number_results"=>200,
+     "results"=>
+    [{"key"=>"t2893941",
+      "baseIcon"=>"album/e/0/3/000000000003a30e/square-200.jpg",
+      "canDownloadAlbumOnly"=>false,
+      "radio"=>{"type"=>"sr", "key"=>"sr2893941"},
+      "artistUrl"=>"/artist/System_Of_A_Down/",
+      "duration"=>210,
+      "album"=>"Toxicity",
+      "isClean"=>false,
+      "albumUrl"=>"/artist/System_Of_A_Down/album/Toxicity/",
+      "shortUrl"=>"http://rd.io/x/QitudzY/",
+      "albumArtist"=>"System Of A Down",
+      "canStream"=>true,
+      "embedUrl"=>"https://rd.io/e/QitudzY/",
+      "type"=>"t",
+      "gridIcon"=>"http://rdiodynimages0-a.akamaihd.net/?l=a238350-0%3Aboxblur%2810%25%2C10%25%29%3Ba238350-0%3Aprimary%280.65%29%3B%240%3Aoverlay%28%241%29%3Ba238350-0%3Apad%2850%25%29%3B%242%3Aoverlay%28%243%29",
+      "price"=>nil,
+      "trackNum"=>6,
+      "albumArtistKey"=>"r138727",
+      "radioKey"=>"sr2893941",
+      "icon"=>"http://img02.cdn2-rdio.com/album/e/0/3/000000000003a30e/square-200.jpg",
+      "canSample"=>true,
+      "name"=>"Chop Suey!",
+      "isExplicit"=>false,
+      "artist"=>"System Of A Down",
+      "url"=>"/artist/System_Of_A_Down/album/Toxicity/track/Chop_Suey!/",
+      "icon400"=>"http://img00.cdn2-rdio.com/album/e/0/3/000000000003a30e/square-400.jpg",
+      "artistKey"=>"r138727",
+      "canDownload"=>false,
+      "length"=>1,
+      "canTether"=>true,
+      "albumKey"=>"a238350"}]}}
+end
