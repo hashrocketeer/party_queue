@@ -1,0 +1,7 @@
+= link_to 'Create Queue', '/auth/rdio'
+
+"Join a Queue"
+
+- @music_queues.each do |music_queue|
+  = link_to music_queue.id, music_queue_path(music_queue)
+

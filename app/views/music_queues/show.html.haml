@@ -4,6 +4,13 @@
 -#  %input{type: 'text', label: 'Track Name', name: 'Track Name' }
 -#  %input{type: 'submit', name: 'Search Tracks', value: 'Search Tracks'}
 
+%p
+  - @music_queue.tracks.each do |track|
+    = track.artist
+    = track.album
+    = track.name
+    = image_tag(track.icon)
+
 = form_tag search_track_path, method: :get do
   = text_field_tag 'track_name'
   = submit_tag 'Search Tracks'

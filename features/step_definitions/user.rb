@@ -31,6 +31,10 @@ And 'I create a music queue' do
   response = Net::HTTP.get(uri)
   @music_queue_count = MusicQueue.count
   Capybara.current_session.driver.submit :post, rdio_sessions_path, response
+
+   # click_on 'Create a new Music Queue'
+   # fill_in 'music_queue_title', with: 'Jacksonville Queue'
+   # click_on 'Create Queue'
 end
 
 Then(/^another music queue exists$/) do

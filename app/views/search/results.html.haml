@@ -5,6 +5,6 @@
         %strong
           = result['artist']
       %div= result['album']
-      %div= result['name']
+      %div= link_to result['name'], tracks_path(result), method: :post
 - else
   No Search Results

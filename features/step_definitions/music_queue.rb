@@ -18,3 +18,11 @@ end
 Then(/^I see search results$/) do
   expect(page).to have_content('Chop Suey!')
 end
+
+When(/^I click "(.*?)"$/) do |link_text|
+  click_on link_text
+end
+
+Then(/^"(.*?)" is added to the music queue$/) do |track_name|
+  expect(page).to have_content("#{track_name} has been added to the Queue")
+end
