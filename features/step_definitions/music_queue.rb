@@ -11,7 +11,7 @@ end
 Given(/^I search for "(.*?)"$/) do |track|
   fill_in 'track_name', with: track
   stub_request(:post, "http://api.rdio.com/1/").to_return(:status => 200, body: rdio_track_response, headers: {})
-  click_on 'Search Tracks'
+  click_on 'Search for Tracks'
 
 end
 
