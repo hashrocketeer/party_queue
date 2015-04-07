@@ -40,9 +40,6 @@ end
 Then(/^I am on my music queue page$/) do
   music_queue = MusicQueue.last
   expect(current_path).to eq(music_queue_path(music_queue))
-  within 'h3' do
-    expect(page).to have_content("Queue ##{music_queue.id}")
-  end
 end
 
 Given(/^I login to Google without a Hashrocket email$/) do

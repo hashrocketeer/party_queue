@@ -5,6 +5,8 @@ class TracksController < ApplicationController
       TrackRequest.create(track_id: track.id, music_queue_id: current_music_queue.id)
       if current_music_queue.tracks.count == 1
         MusicPlayingService.new.create_playlist(current_music_queue)
+      else
+        MusicPlayingService.new.add_to_playlist(current_music_queue)
       end
       redirect_to music_queue_path(current_music_queue), notice: "#{params['name']} has been added to the Queue"
     else

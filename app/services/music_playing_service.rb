@@ -15,4 +15,8 @@ class MusicPlayingService
     music_queue.key = playlist_hash['key']
     music_queue.save
   end
+
+  def add_to_playlist(music_queue)
+    @client.addToPlaylist(playlist: music_queue.key, tracks: "#{music_queue.tracks.last.key}")
+  end
 end
