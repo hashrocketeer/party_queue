@@ -30,11 +30,7 @@ And 'I create a music queue' do
   uri = URI('https://accounts.google.com/o/oauth2/auth')
   response = Net::HTTP.get(uri)
   @music_queue_count = MusicQueue.count
-  Capybara.current_session.driver.submit :post, rdio_sessions_path, response
-
-   # click_on 'Create a new Music Queue'
-   # fill_in 'music_queue_title', with: 'Jacksonville Queue'
-   # click_on 'Create Queue'
+  Capybara.current_session.driver.submit :post, music_queues_path, response
 end
 
 Then(/^another music queue exists$/) do

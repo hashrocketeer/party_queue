@@ -10,6 +10,10 @@ module RdioApi
     end
   end
 
+  def respond_to?(method)
+    AUTHENTICATED.include?(method.to_sym) || UNAUTHENTICATED.include?(method.to_sym) ? true : false
+  end
+
   private
 
   def unauthenticated_request(method_sym, *arguments)
@@ -18,6 +22,13 @@ module RdioApi
     end
     response.body.result
   end
+
+   def authenticated_request(method_sym, *arguments)
+     response = authenticated_connection.post(api_url) do |request|
+       request.body = {:method => method_sym.to_s}.merge!(Hash[*arguments.flatten])
+     end
+     response.body.result
+   end
 
   UNAUTHENTICATED = [
     :get,

@@ -1,7 +1,16 @@
-= link_to 'Create Queue', '/auth/rdio'
+= form_tag new_music_queue_path, method: :get do
+  = text_field_tag 'music_queue_name'
+  %span Enter Queue Name
 
-"Join a Queue"
+  = text_field_tag 'music_queue_description'
+  %span Enter Queue Description
+
+  %p= submit_tag 'Create Queue'
+
+%p Join a Queue
 
 - @music_queues.each do |music_queue|
-  = link_to music_queue.id, music_queue_path(music_queue)
+  %p
+    %div= link_to music_queue.name || music_queue.id, music_queue_path(music_queue)
+    = music_queue.description
 

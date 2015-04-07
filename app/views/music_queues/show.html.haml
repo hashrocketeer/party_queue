@@ -1,17 +1,30 @@
+%span{class: 'playlist', id: "#{@music_queue.key}"}
+
 = form_tag search_track_path, method: :get do
   = text_field_tag 'track_name'
   = submit_tag 'Search for Tracks'
 
-%h3= "Queue ##{@music_queue.id}"
+%h3= "#{@music_queue.name || "Music Queue #{@music_queue.id}"}"
+%h5= "Description: #{@music_queue.description}"
 
--#%form{controller: 'search', action: 'find_track', method: 'get' }
--#  %input{type: 'text', label: 'Track Name', name: 'Track Name' }
--#  %input{type: 'submit', name: 'Search Tracks', value: 'Search Tracks'}
+%p
+  = (File.read("#{Rails.root}/app/views/rdio_interface.html")).html_safe
 
-%div
+Tracks in the queue:
+%p
   - @music_queue.tracks.each do |track|
-    %p= track.artist
-    %p= track.album
-    %p= track.name
-    %p= image_tag(track.icon)
+    %p
+    %div= image_tag(track.icon)
+    %div
+      %strong
+        Track:
+      = track.name
+    %div
+      %strong
+        Album:
+      = track.album
+    %div
+      %strong
+        Artist:
+      = track.artist
 
