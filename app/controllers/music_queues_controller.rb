@@ -17,29 +17,17 @@ class MusicQueuesController < ApplicationController
   end
 
   def create
-    if access_token
-      ENV['rdio_access_token'] = access_token
-      ENV['rdio_access_secret'] = access_secret
-    end
+    OauthProcessingService.new(request.env['omniauth.auth']).process_response
     @music_queue = MusicQueue.create(name: session[:music_queue_name], description: session[:music_queue_description])
-    session[:music_queue_name] = nil
-    session[:music_queue_description] = nil
-    session[:rdio_user] = true
     session[:current_music_queue] = @music_queue.id
     redirect_to music_queue_path(@music_queue)
   end
 
   private
 
-  def oauth_response
-    request.env['omniauth.auth']
-  end
-
-  def access_token
-      oauth_response['extra']['access_token'].token if oauth_response
-  end
-
-  def access_secret
-    oauth_response['extra']['access_secret'].secret if oauth_response
+  def set_sessions
+    session[:music_queue_name] = nil
+    session[:music_queue_description] = nil
+    session[:rdio_user] = true
   end
 end

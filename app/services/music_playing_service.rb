@@ -4,7 +4,8 @@ class MusicPlayingService
   end
 
   def search_tracks(track)
-    @client.search(query: track, types: 'track')
+    tracks = @client.search(query: track, types: 'track')
+    tracks['results'] if tracks
   end
 
   def create_playlist(music_queue)
@@ -19,6 +20,14 @@ class MusicPlayingService
 
   def set_playlist_order(music_queue)
     @client.setPlaylistOrder(playlist: music_queue.key, tracks: sorted_tracks_list(music_queue))
+  end
+
+  def update_playlist(music_queue)
+    if music_queue.tracks.count == 1
+      create_playlist(music_queue)
+    else
+      add_to_playlist(music_queue)
+    end
   end
 
   private

@@ -1,7 +1,6 @@
 class SearchController < ApplicationController
   def track
-    tracks = MusicPlayingService.new.search_tracks(params['track_name'])
-    @search_results = tracks['results'] if tracks
+    @search_results = MusicPlayingService.new.search_tracks(params['track_name'])
     render :results
   end
 end

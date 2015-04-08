@@ -27,10 +27,16 @@ Tracks in the queue:
       %strong
         Artist:
       = track.artist
-    - if can_vote_up(track)
+
+    %div
+      %strong
+        Number of Votes:
+      = number_of_votes_for(track)
+
+    - if valid_up_vote(track)
       %div
         = link_to '+1', up_votes_path(track), method: :post
-    - if can_vote_down(track)
+    - if valid_down_vote(track)
       %div
         = link_to '-1', down_votes_path(track), method: :post
 
