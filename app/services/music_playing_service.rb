@@ -8,7 +8,7 @@ class MusicPlayingService
   end
 
   def create_playlist(music_queue)
-    playlist_hash = @client.createPlaylist(name: music_queue.name, description: music_queue.description, tracks: tracks_list(music_queue))
+    playlist_hash = @client.createPlaylist(name: music_queue.name, description: music_queue.description, tracks: tracks_list(music_queue.tracks))
     music_queue.key = playlist_hash['key']
     music_queue.save
   end
@@ -18,13 +18,18 @@ class MusicPlayingService
   end
 
   def set_playlist_order(music_queue)
-    @client.setPlaylistOrder(playlist: music_queue.key, tracks: tracks_list(music_queue))
+    @client.setPlaylistOrder(playlist: music_queue.key, tracks: sorted_tracks_list(music_queue))
   end
 
   private
 
-  def tracks_list(music_queue)
-    music_queue.tracks.reduce("") do |tracks, track|
+  def sorted_tracks_list(music_queue)
+    sorted_tracks = music_queue.track_requests.sort_by { |track_request| track_request.score}.reverse.map(&:track)
+    tracks_list(sorted_tracks)
+  end
+
+  def tracks_list(tracks)
+    tracks.reduce("") do |tracks, track|
       tracks + track.key + ', '
     end[0..-3]
   end

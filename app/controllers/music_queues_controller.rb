@@ -40,6 +40,6 @@ class MusicQueuesController < ApplicationController
   end
 
   def access_secret
-    oauth_response['extra']['access_token'].secret if oauth_response
+    oauth_response['extra']['access_secret'].secret if oauth_response
   end
 end

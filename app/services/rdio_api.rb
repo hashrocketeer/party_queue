@@ -27,7 +27,7 @@ module RdioApi
      response = authenticated_connection.post(api_url) do |request|
        request.body = {:method => method_sym.to_s}.merge!(Hash[*arguments.flatten])
      end
-     response.body ? response.body.result : response.body
+     response.body.result
    end
 
   UNAUTHENTICATED = [
