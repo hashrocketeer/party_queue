@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407192526) do
+ActiveRecord::Schema.define(version: 20150408150710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "down_votes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "track_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "music_queues", force: true do |t|
     t.datetime "created_at"
@@ -29,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150407192526) do
     t.integer  "track_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   add_index "track_requests", ["music_queue_id"], name: "index_track_requests_on_music_queue_id", using: :btree
@@ -40,6 +48,19 @@ ActiveRecord::Schema.define(version: 20150407192526) do
     t.string   "name"
     t.string   "icon"
     t.string   "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "up_votes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "track_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

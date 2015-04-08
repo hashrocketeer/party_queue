@@ -26,3 +26,56 @@ end
 Then(/^"(.*?)" is added to the music queue$/) do |track_name|
   expect(page).to have_content("#{track_name} has been added to the Queue")
 end
+
+When(/^I add a track to the music queue$/) do
+ steps %Q{
+    Given I search for "Chop Suey!"
+    Then I see search results
+    When I click "Chop Suey!"
+    Then "Chop Suey!" is added to the music queue
+ }
+end
+
+Given(/^I vote up for the track$/) do
+  @track_request_score = TrackRequest.last.score
+  click_on '+1'
+end
+
+Given(/^I try to vote up for the track$/) do
+  @track_request_score = TrackRequest.last.score
+  expect(page).not_to have_link('+1')
+end
+
+Given(/^I vote down for the track$/) do
+  @track_request_score = TrackRequest.last.score
+  click_on '-1'
+end
+
+Given(/^I try to vote down for the track$/) do
+  @track_request_score = TrackRequest.last.score
+  expect(page).not_to have_link('-1')
+end
+
+Given(/^I change my vote to up$/) do
+  click_on '+1'
+end
+
+Given(/^I change my vote to down$/) do
+  click_on '-1'
+end
+
+Then(/^the track request's score increases by one$/) do
+  expect(TrackRequest.last.score).to eq(@track_request_score + 1)
+end
+
+Then(/^the track request's score decreases by one$/) do
+  expect(TrackRequest.last.score).to eq(@track_request_score - 1)
+end
+
+Then(/^the track request's score doesn't increase$/) do
+  expect(TrackRequest.last.score).to eq(@track_request_score)
+end
+
+Then(/^the track request's score doesn't decrease$/) do
+  expect(TrackRequest.last.score).to eq(@track_request_score)
+end

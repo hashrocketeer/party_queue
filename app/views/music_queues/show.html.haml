@@ -12,7 +12,7 @@
 
 Tracks in the queue:
 %p
-  - @music_queue.tracks.each do |track|
+  - sorted_tracks(@music_queue).each do |track|
     %p
     %div= image_tag(track.icon)
     %div
@@ -27,4 +27,10 @@ Tracks in the queue:
       %strong
         Artist:
       = track.artist
+    - if can_vote_up(track)
+      %div
+        = link_to '+1', up_votes_path(track), method: :post
+    - if can_vote_down(track)
+      %div
+        = link_to '-1', down_votes_path(track), method: :post
 

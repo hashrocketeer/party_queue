@@ -8,15 +8,24 @@ class MusicPlayingService
   end
 
   def create_playlist(music_queue)
-    all_tracks = music_queue.tracks.reduce("") do |tracks, track|
-      tracks + track.key + ', '
-    end[0..-3]
-    playlist_hash = @client.createPlaylist(name: music_queue.name, description: music_queue.description, tracks: all_tracks)
+    playlist_hash = @client.createPlaylist(name: music_queue.name, description: music_queue.description, tracks: tracks_list(music_queue))
     music_queue.key = playlist_hash['key']
     music_queue.save
   end
 
   def add_to_playlist(music_queue)
     @client.addToPlaylist(playlist: music_queue.key, tracks: "#{music_queue.tracks.last.key}")
+  end
+
+  def set_playlist_order(music_queue)
+    @client.setPlaylistOrder(playlist: music_queue.key, tracks: tracks_list(music_queue))
+  end
+
+  private
+
+  def tracks_list(music_queue)
+    music_queue.tracks.reduce("") do |tracks, track|
+      tracks + track.key + ', '
+    end[0..-3]
   end
 end
