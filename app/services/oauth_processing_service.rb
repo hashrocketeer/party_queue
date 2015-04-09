@@ -13,10 +13,10 @@ class OauthProcessingService
   private
 
   def access_token
-      @response['extra']['access_token'].token if @response
+    @response['extra']['access_token'].token if @response
   end
 
   def access_secret
-    oauth_response['extra']['access_secret'].secret if oauth_response
+    @response['extra']['access_token'].secret if @response
   end
 end

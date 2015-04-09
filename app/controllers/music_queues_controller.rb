@@ -19,15 +19,15 @@ class MusicQueuesController < ApplicationController
   def create
     OauthProcessingService.new(request.env['omniauth.auth']).process_response
     @music_queue = MusicQueue.create(name: session[:music_queue_name], description: session[:music_queue_description])
+    clear_sessions
     session[:current_music_queue] = @music_queue.id
     redirect_to music_queue_path(@music_queue)
   end
 
   private
 
-  def set_sessions
+  def clear_sessions
     session[:music_queue_name] = nil
     session[:music_queue_description] = nil
-    session[:rdio_user] = true
   end
 end

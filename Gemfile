@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.1'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
@@ -14,7 +13,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
 gem 'haml-rails'
-# gem 'omniauth-spotify'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rdio'
 gem 'figaro'
@@ -32,5 +30,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'webmock', '1.20.0'
+  gem 'fabrication'
+  gem 'faker', '~> 1.2.0'
 end
 

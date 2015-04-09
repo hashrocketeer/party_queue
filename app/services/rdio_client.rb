@@ -1,6 +1,6 @@
 class RdioClient
   include RdioApi
-  # pass in key, secret
+
   def initialize(options = {})
     @consumer_key    = options[:consumer_id]
     @consumer_secret = options[:consumer_secret]

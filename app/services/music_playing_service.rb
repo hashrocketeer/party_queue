@@ -30,16 +30,14 @@ class MusicPlayingService
     end
   end
 
-  private
-
   def sorted_tracks_list(music_queue)
     sorted_tracks = music_queue.track_requests.sort_by { |track_request| track_request.score}.reverse.map(&:track)
     tracks_list(sorted_tracks)
   end
 
   def tracks_list(tracks)
-    tracks.reduce("") do |tracks, track|
-      tracks + track.key + ', '
+    tracks.reduce("") do |list, track|
+      list + track.key + ', '
     end[0..-3]
   end
 end
