@@ -1,9 +1,6 @@
 class GoogleSessionsController < ApplicationController
   include ApplicationHelper
 
-  def new
-  end
-
   def create
     if rocketeer?
       user = User.find_or_create_by(email: google_email)
