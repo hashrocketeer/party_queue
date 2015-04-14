@@ -25,9 +25,10 @@ class MusicPlayingService
 
   def update_playlist
     if @music_queue.tracks.count == 1
-      create_playlist
-    else
-      add_to_playlist
+      @music_queue.set_playing_track_request
+      # create_playlist
+    # else
+    #   add_to_playlist
     end
   end
 

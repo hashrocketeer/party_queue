@@ -24,7 +24,26 @@ class MusicQueuesController < ApplicationController
     redirect_to music_queue_path(@music_queue)
   end
 
+  def list
+    current_music_queue.remove_first_track_request
+    render(partial: 'list', locals: {list: current_music_queue.playlist}, layout: false)
+  end
+
+  def playing
+    render(partial: 'playing', locals: {track: current_music_queue.playing_track}, layout: false)
+  end
+
   private
+
+  # def playlist
+  #   current_music_queue.playlist
+  # end
+  # helper_method :playlist
+
+  # def playing_track
+  #   current_music_queue.playing_track
+  # end
+  # helper_method :playing_track
 
   def clear_sessions
     session[:music_queue_name] = nil

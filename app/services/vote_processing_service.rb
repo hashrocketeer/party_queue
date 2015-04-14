@@ -12,7 +12,7 @@ class VoteProcessingService
       remove_down_vote_for(up_vote)
       add_to_track_request_score
     end
-    MusicPlayingService.new(@music_queue).set_playlist_order
+    # MusicPlayingService.new(@music_queue).set_playlist_order
   end
 
   def process_down_vote
@@ -22,7 +22,7 @@ class VoteProcessingService
       remove_up_vote_for(down_vote)
       subtract_from_track_request_score
     end
-    MusicPlayingService.new(@music_queue).set_playlist_order
+    # MusicPlayingService.new(@music_queue).set_playlist_order
   end
 
   private
