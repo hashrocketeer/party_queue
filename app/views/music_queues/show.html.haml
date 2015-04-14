@@ -11,32 +11,5 @@
   = (File.read("#{Rails.root}/app/views/rdio_interface.html")).html_safe
 
 Tracks in the queue:
-%p
-  - sorted_tracks(@music_queue).each do |track|
-    %p
-    %div= image_tag(track.icon)
-    %div
-      %strong
-        Track:
-      = track.name
-    %div
-      %strong
-        Album:
-      = track.album
-    %div
-      %strong
-        Artist:
-      = track.artist
-
-    %div
-      %strong
-        Number of Votes:
-      = number_of_votes_for(track)
-
-    - if valid_up_vote(track)
-      %div
-        = link_to '+1', up_votes_path(track), method: :post
-    - if valid_down_vote(track)
-      %div
-        = link_to '-1', down_votes_path(track), method: :post
-
+%p{id: 'playlist'}
+  = render 'music_queues/list', music_queue: @music_queue

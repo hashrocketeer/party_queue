@@ -1,0 +1,28 @@
+- sorted_tracks(music_queue).each_with_index do |track, i|
+  %span{class: "#{i}", id: "#{track.key}"}
+  %div= image_tag(track.icon)
+  %div
+    %strong
+      Track:
+    = track.name
+  %div
+    %strong
+      Album:
+    = track.album
+  %div
+    %strong
+      Artist:
+    = track.artist
+
+  %div
+    %strong
+      Number of Votes:
+    = number_of_votes_for(track)
+
+  - if valid_up_vote(track)
+    %div
+      = link_to '+1', up_votes_path(track), method: :post
+  - if valid_down_vote(track)
+    %div
+      = link_to '-1', down_votes_path(track), method: :post
+
