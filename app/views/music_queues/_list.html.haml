@@ -1,5 +1,4 @@
-- sorted_tracks(music_queue).each_with_index do |track, i|
-  %span{class: "#{i}", id: "#{track.key}"}
+- list.each do |track|
   %div= image_tag(track.icon)
   %div
     %strong
@@ -21,8 +20,7 @@
 
   - if valid_up_vote(track)
     %div
-      = link_to '+1', up_votes_path(track), method: :post
+      = link_to '+1', up_votes_path(track), method: :post, remote: true
   - if valid_down_vote(track)
     %div
-      = link_to '-1', down_votes_path(track), method: :post
-
+      = link_to '-1', down_votes_path(track), method: :post, remote: true

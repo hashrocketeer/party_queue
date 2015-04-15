@@ -13,10 +13,6 @@ module ApplicationHelper
     MusicQueue.find(session[:current_music_queue]) if session[:current_music_queue]
   end
 
-  def sorted_tracks(music_queue)
-    music_queue.track_requests.sort_by { |track_request| track_request.score}.reverse.map(&:track)
-  end
-
   def number_of_votes_for(track)
     track.track_requests.find_by(music_queue_id: current_music_queue.id).score
   end
