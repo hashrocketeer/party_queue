@@ -24,7 +24,7 @@ When(/^I click "(.*?)"$/) do |link_text|
 end
 
 Then(/^"(.*?)" is added to the music queue$/) do |track_name|
-  expect(page).to have_content("#{track_name} has been added to the Queue")
+  expect(page).to have_content("#{track_name} has been added to the Playlist")
 end
 
 When(/^I add a track to the music queue$/) do
@@ -37,22 +37,22 @@ When(/^I add a track to the music queue$/) do
 end
 
 Given(/^I vote up for the track$/) do
-  @track_request_score = TrackRequest.last.score
+  @track_request_score = TrackRequest.first.score
   click_on '+1'
 end
 
 Given(/^I try to vote up for the track$/) do
-  @track_request_score = TrackRequest.last.score
+  @track_request_score = TrackRequest.first.score
   expect(page).not_to have_link('+1')
 end
 
 Given(/^I vote down for the track$/) do
-  @track_request_score = TrackRequest.last.score
+  @track_request_score = TrackRequest.first.score
   click_on '-1'
 end
 
 Given(/^I try to vote down for the track$/) do
-  @track_request_score = TrackRequest.last.score
+  @track_request_score = TrackRequest.first.score
   expect(page).not_to have_link('-1')
 end
 
@@ -65,17 +65,17 @@ Given(/^I change my vote to down$/) do
 end
 
 Then(/^the track request's score increases by one$/) do
-  expect(TrackRequest.last.score).to eq(@track_request_score + 1)
+  expect(TrackRequest.first.score).to eq(@track_request_score + 1)
 end
 
 Then(/^the track request's score decreases by one$/) do
-  expect(TrackRequest.last.score).to eq(@track_request_score - 1)
+  expect(TrackRequest.first.score).to eq(@track_request_score - 1)
 end
 
 Then(/^the track request's score doesn't increase$/) do
-  expect(TrackRequest.last.score).to eq(@track_request_score)
+  expect(TrackRequest.first.score).to eq(@track_request_score)
 end
 
 Then(/^the track request's score doesn't decrease$/) do
-  expect(TrackRequest.last.score).to eq(@track_request_score)
+  expect(TrackRequest.first.score).to eq(@track_request_score)
 end

@@ -16,7 +16,7 @@ class MusicQueue < ActiveRecord::Base
   end
 
   def playing_track
-    playing_track_request.track
+    playing_track_request.track if playing_track_request_id
   end
 
   def set_playing_track_request

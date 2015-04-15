@@ -35,16 +35,6 @@ class MusicQueuesController < ApplicationController
 
   private
 
-  # def playlist
-  #   current_music_queue.playlist
-  # end
-  # helper_method :playlist
-
-  # def playing_track
-  #   current_music_queue.playing_track
-  # end
-  # helper_method :playing_track
-
   def clear_sessions
     session[:music_queue_name] = nil
     session[:music_queue_description] = nil
