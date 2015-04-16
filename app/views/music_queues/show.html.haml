@@ -33,7 +33,7 @@
         %button#next &gt;&gt;
 
   %div{id: 'playing'}
-    = render 'music_queues/playing', track: current_music_queue.playing_track
+    = render 'music_queues/playing', track: current_music_queue.playing_track, track_request: current_music_queue.playing_track_request
 - if current_music_queue.playlist
   Tracks in the queue:
   %div{id: 'playlist'}

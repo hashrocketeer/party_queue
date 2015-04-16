@@ -30,7 +30,7 @@ class MusicQueuesController < ApplicationController
 
   def playing
     current_music_queue.remove_first_track_request
-    render(partial: 'playing', locals: {track: current_music_queue.playing_track}, layout: false)
+    render(partial: 'playing', locals: {track: current_music_queue.playing_track, track_request: current_music_queue.playing_track_request}, layout: false)
   end
 
   private

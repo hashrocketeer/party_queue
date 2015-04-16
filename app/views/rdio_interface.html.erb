@@ -1,10 +1,10 @@
 <script type="text/javascript">
   var duration = 1; // track the duration of the currently playing track
   $(document).ready(function() {
-      var $api = $('#api'), $rdio = $api.rdio("GBVVL9JK_____3RtczU0NGN4N2s5c2V1eWNneG5rNmQ2dHBhcnR5cS5sb2NhbHR1bm5lbC5tZSrD_CgGKgrC8xbRXK7S3Fs=");
+      var $api = $('#api'), $rdio = $api.rdio("GBlVMAr3_____3RtczU0NGN4N2s5c2V1eWNneG5rNmQ2dHBhcnR5cXVldWUubG9jYWx0dW5uZWwubWX4sC8ZuJ1CjHvWyhDdNEa3");
       $('#api').bind('ready.rdio', function() {
-        $(this).rdio().play($('.0').prop('id'));
-      });
+          $rdio.play($('.playing_track').prop('id'), {initialPosition: $('.playing_track_request_position').prop('id')});
+        });
       $('#api').bind('playingTrackChanged.rdio', function(e, playingTrack, sourcePosition) {
         if (playingTrack) {
         duration = playingTrack.duration;
@@ -15,12 +15,13 @@
         }
         });
       $('#api').bind('positionChanged.rdio', function(e, position) {
-        $('#playlist').load("/music_queues/list");
+        $.post("/track_requests/update_playing_position/" + $('.playing_track_request_id').prop('id') +  "/" + position);
+        $('#playlist').load("/music_queues/list/");
         $('#position').css('width', Math.floor(100*position/duration)+'%');
         if (position > (duration - .3)) {
           $('#playing').load("/music_queues/playing", function() {
             $('#playlist').load("/music_queues/list", function() {
-                $rdio.play($('.0').prop('id'));
+                $rdio.play($('.playing_track').prop('id'));
               });
             });
         }
