@@ -9,7 +9,6 @@
 %h3= "#{@music_queue.name || "Music Queue #{@music_queue.id}"}"
 %h5= "Description: #{@music_queue.description}"
 
-Tracks in the queue:
 - if current_music_queue.playing_track
   #api
   %img#art{:height => "200", :width => "200"}
@@ -36,5 +35,6 @@ Tracks in the queue:
   %div{id: 'playing'}
     = render 'music_queues/playing', track: current_music_queue.playing_track
 - if current_music_queue.playlist
+  Tracks in the queue:
   %div{id: 'playlist'}
     = render 'music_queues/list', list: current_music_queue.playlist
