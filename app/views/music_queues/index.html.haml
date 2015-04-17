@@ -1,13 +1,17 @@
-= form_tag new_music_queue_path, method: :get do
-  = text_field_tag 'music_queue_name'
-  %span Enter Queue Name
+- if current_rdio_user?
+  = form_for(@music_queue) do |f|
+    %p
+      %div
+        = f.label :name
+        = f.text_field :name
 
-  = text_field_tag 'music_queue_description'
-  %span Enter Queue Description
+      %div
+        = f.label :description
+        = f.text_field :description
 
-  %p= submit_tag 'Create Queue'
+      = f.submit 'Create Playlist'
 
-%p Join a Queue
+%p Join a Playlist
 
 - @music_queues.each do |music_queue|
   %p

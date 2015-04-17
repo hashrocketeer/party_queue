@@ -1,5 +1,3 @@
-= (File.read("#{Rails.root}/app/views/rdio_interface.html.erb")).html_safe
-
 %span{class: 'music_queue', id: "#{@music_queue.id}"}
 
 = form_tag search_track_path, method: :get do
@@ -11,30 +9,15 @@
 
 - if current_music_queue.playing_track
   #api
-  %img#art{:height => "200", :width => "200"}
-    %div
-      %div
-        %b Track:
-        %span#track
-      %div
-        %b Album:
-        %span#album
-      %div
-        %b Artist:
-        %span#artist
-      %div
-        %b Position:
-        %span{:style => "display:inline-block;width:200px;border:1px solid black;"}
-          %span#position{:style => "display:inline-block;background-color:#666"} &nbsp;
-      %div
-        %button#previous &lt;&lt;
-        %button#play |&gt;
-        %button#pause ||
-        %button#next &gt;&gt;
-
   %div{id: 'playing'}
     = render 'music_queues/playing', track: current_music_queue.playing_track, track_request: current_music_queue.playing_track_request
+
+- if current_rdio_user?
+  = render 'music_queues/authenticated_rdio_interface'
+- else
+  = render 'music_queues/unauthenticated_rdio_interface'
+
 - if current_music_queue.playlist
   Tracks in the queue:
   %div{id: 'playlist'}
-    = render 'music_queues/list', list: current_music_queue.playlist
+    = render 'music_queues/list', list: current_music_queue.playlist, requests: current_music_queue.playlist_requests

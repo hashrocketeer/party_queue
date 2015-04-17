@@ -30,7 +30,7 @@ And 'I create a music queue' do
   uri = URI('https://accounts.google.com/o/oauth2/auth')
   response = Net::HTTP.get(uri)
   @music_queue_count = MusicQueue.count
-  Capybara.current_session.driver.submit :post, music_queues_path, response
+  Capybara.current_session.driver.submit :post, music_queues_path, {'music_queue' => {'name' => 'test', 'description' => 'testing'}}
 end
 
 Then(/^another music queue exists$/) do
@@ -53,4 +53,8 @@ end
 
 Then(/^I see the google sessions new page$/) do
   expect(current_path).to eq(new_google_session_path)
+end
+
+Given(/^I login to a music playing service$/) do
+  Capybara.current_session.driver.submit :post, rdio_sessions_path, rdio_response
 end

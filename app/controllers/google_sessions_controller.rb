@@ -11,6 +11,11 @@ class GoogleSessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session[:google_user] = nil
+    render :new
+  end
+
   private
 
   def google_email

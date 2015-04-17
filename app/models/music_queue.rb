@@ -25,6 +25,10 @@ class MusicQueue < ActiveRecord::Base
   end
 
   def playlist
-    sort_track_requests.reject{ |t| t == playing_track_request }.map(&:track)
+    playlist_requests.map(&:track)
+  end
+
+  def playlist_requests
+    sort_track_requests.reject{ |t| t == playing_track_request }
   end
 end

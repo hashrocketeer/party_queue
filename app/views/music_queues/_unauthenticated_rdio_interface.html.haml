@@ -1,0 +1,13 @@
+:javascript
+  var duration = 1; // track the duration of the currently playing track
+  var updatePlaylist = function () {
+    $('#playlist').load("/music_queues/list", function() {
+      $('#playing').load("/music_queues/playing", function() {
+        updatePlaylist();
+      });
+    });
+  };
+  $(document).ready(function() {
+    updatePlaylist();
+  });
+

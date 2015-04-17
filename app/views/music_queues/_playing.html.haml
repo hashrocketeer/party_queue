@@ -1,3 +1,34 @@
 %span{class: 'playing_track', id: "#{track.key}"}
 %span{class: 'playing_track_request_id', id: "#{track_request.id}"}
 %span{class: 'playing_track_request_position', id: "#{track_request.playing_position}"}
+
+%img#art{:src => "#{track.icon}", :height => "200", :width => "200"}
+%div
+  %div
+    %b Track:
+    %span#track
+      = track.name
+  %div
+    %b Album:
+    %span#album
+      = track.album
+  %div
+    %b Artist:
+    %span#artist
+      = track.artist
+  %div
+    %b Position:
+    %span{:style => "display:inline-block;width:200px;border:1px solid black;"}
+      %span#position{:style => "width:#{current_track_position};display:inline-block;background-color:#666"} &nbsp;
+  -# - if current_rdio_user?
+  -#   %div
+  -#     %button#previous &lt;&lt;
+  -#     %button#play |&gt;
+  -#     %button#pause ||
+  -#     %button#next &gt;&gt;
+-# :javascript
+-#   window.rdioTrackInfo = {
+-#     playPosition: #{track_request.playing_position},
+-#     playingTrackId: #{track_request.id},
+-#     playingTrackKey: #{track.key}
+-#   }

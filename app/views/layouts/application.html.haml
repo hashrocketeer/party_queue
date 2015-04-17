@@ -8,4 +8,18 @@
   %body
     - if flash[:notice]
       .flash= flash[:notice]
+    %div
+      - if current_google_user
+        = link_to 'logout of google', google_session_path(current_google_user.id), method: :delete
+      - else
+        = link_to 'login to google', "/auth/google_oauth2"
+        %div
+          You must have a hashrocket email address to access playlists.
+    %div
+      - if current_rdio_user?
+        = link_to 'logout of rdio', rdio_session_path('1'), method: :delete
+      - else
+        = link_to 'login to rdio', '/auth/rdio'
+        %div
+          You must be logged in with rdio to create playlists and play tracks.
     = yield

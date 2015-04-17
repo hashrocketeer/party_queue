@@ -1,4 +1,4 @@
-<script type="text/javascript">
+:javascript
   var duration = 1; // track the duration of the currently playing track
   $(document).ready(function() {
       var $api = $('#api'), $rdio = $api.rdio("GBlVMAr3_____3RtczU0NGN4N2s5c2V1eWNneG5rNmQ2dHBhcnR5cXVldWUubG9jYWx0dW5uZWwubWX4sC8ZuJ1CjHvWyhDdNEa3");
@@ -19,11 +19,13 @@
         $('#playlist').load("/music_queues/list/");
         $('#position').css('width', Math.floor(100*position/duration)+'%');
         if (position > (duration - .3)) {
-          $('#playing').load("/music_queues/playing", function() {
-            $('#playlist').load("/music_queues/list", function() {
-                $rdio.play($('.playing_track').prop('id'));
+          $.post("/music_queues/update_playing_track", function () {
+            $('#playing').load("/music_queues/playing", function() {
+              $('#playlist').load("/music_queues/list", function() {
+                  $rdio.play($('.playing_track').prop('id'));
               });
             });
+          });
         }
         });
       $('#api').bind('playStateChanged.rdio', function(e, playState) {
@@ -35,10 +37,8 @@
         $('#pause').show();
         }
         });
-      //$('#api').rdio("GBJVJA8BAQYUcmR2cHlzNHd5ZXg3Z2M0OXdoaDY3aHdrbjEwNjhkM2Q3Lm5ncm9rLmNvbQ-416JbCHObn8dTutyv9_Y=");
       $('#previous').click(function() { $('#api').rdio().previous(); });
       $('#play').click(function() { $('#api').rdio().play(); });
       $('#pause').click(function() { $('#api').rdio().pause(); });
       $('#next').click(function() { $('#api').rdio().next(); });
   });
-</script>

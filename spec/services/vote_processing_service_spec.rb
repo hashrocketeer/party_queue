@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe VoteProcessingService do
-  let(:track) { Fabricate(:track) }
   let(:music_queue) { Fabricate(:music_queue) }
   let(:user) { Fabricate(:user) }
-  let(:track_request) { Fabricate(:track_request, music_queue_id: music_queue.id, track_id: track.id) }
-  let(:subject) { described_class.new(track, music_queue, user) }
+  let(:track_request) { Fabricate(:track_request, music_queue_id: music_queue.id) }
+  let(:subject) { described_class.new(track_request, music_queue, user) }
 
   describe "#process_up_vote" do
     before do

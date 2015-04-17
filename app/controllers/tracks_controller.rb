@@ -13,7 +13,7 @@ class TracksController < ApplicationController
   private
 
   def track_params
-    { name: params['name'], album: params['album'], artist: params['artist'], key: params['key'], icon: params['icon'] }
+    { name: params['name'], album: params['album'], artist: params['artist'], key: params['key'], icon: params['icon'], duration: params['duration'] }
   end
 
   def track_request_params(track)

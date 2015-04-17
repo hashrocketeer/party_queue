@@ -3,6 +3,7 @@ class MusicQueuesController < ApplicationController
 
   def index
     @music_queues = MusicQueue.all
+    @music_queue = MusicQueue.new
   end
 
   def show
@@ -10,27 +11,23 @@ class MusicQueuesController < ApplicationController
     session[:current_music_queue] = @music_queue.id
   end
 
-  def new
-    session[:music_queue_name] = params[:music_queue_name]
-    session[:music_queue_description] = params[:music_queue_description]
-    redirect_to '/auth/rdio'
-  end
-
   def create
-    OauthProcessingService.new(request.env['omniauth.auth']).process_response
-    @music_queue = MusicQueue.create(name: session[:music_queue_name], description: session[:music_queue_description])
+    @music_queue = MusicQueue.create(name: params['music_queue']['name'], description: params['music_queue']['description'])
     clear_sessions
     session[:current_music_queue] = @music_queue.id
     redirect_to music_queue_path(@music_queue)
   end
 
   def list
-    render(partial: 'list', locals: {list: current_music_queue.playlist}, layout: false)
+    render(partial: 'list', locals: {list: current_music_queue.playlist, requests: current_music_queue.playlist_requests}, layout: false)
   end
 
   def playing
-    current_music_queue.remove_first_track_request
     render(partial: 'playing', locals: {track: current_music_queue.playing_track, track_request: current_music_queue.playing_track_request}, layout: false)
+  end
+
+  def update_playing_track
+    current_music_queue.remove_first_track_request
   end
 
   private

@@ -1,4 +1,4 @@
-- list.each do |track|
+- list.each_with_index do |track, i|
   %div= image_tag(track.icon)
   %div
     %strong
@@ -16,11 +16,11 @@
   %div
     %strong
       Number of Votes:
-    = number_of_votes_for(track)
+    = number_of_votes_for(requests[i])
 
-  - if valid_up_vote(track)
+  - if valid_up_vote(requests[i])
     %div
-      = link_to '+1', up_votes_path(track), method: :post, remote: true
-  - if valid_down_vote(track)
+      = link_to '+1', up_votes_path(requests[i]), method: :post, remote: true
+  - if valid_down_vote(requests[i])
     %div
-      = link_to '-1', down_votes_path(track), method: :post, remote: true
+      = link_to '-1', down_votes_path(requests[i]), method: :post, remote: true
